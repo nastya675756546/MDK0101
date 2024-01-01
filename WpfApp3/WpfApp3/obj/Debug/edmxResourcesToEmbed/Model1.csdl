@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Accounting">
+    <Key>
+      <PropertyRef Name="records_id" />
+    </Key>
+    <Property Name="records_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="company_id" Type="Int32" />
+    <Property Name="nameProduct" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="price" Type="Int32" />
+    <NavigationProperty Name="Reference" Relationship="Self.FK" FromRole="Accounting" ToRole="Reference" />
+  </EntityType>
+  <EntityType Name="Reference">
+    <Key>
+      <PropertyRef Name="company_id" />
+    </Key>
+    <Property Name="company_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameCompany" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="addressCompany" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="fullNameDirector" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Accounting" Relationship="Self.FK" FromRole="Reference" ToRole="Accounting" />
+  </EntityType>
+  <Association Name="FK">
+    <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reference">
+        <PropertyRef Name="company_id" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="company_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounting" EntityType="Self.Accounting" />
+    <EntitySet Name="Reference" EntityType="Self.Reference" />
+    <AssociationSet Name="FK" Association="Self.FK">
+      <End Role="Reference" EntitySet="Reference" />
+      <End Role="Accounting" EntitySet="Accounting" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

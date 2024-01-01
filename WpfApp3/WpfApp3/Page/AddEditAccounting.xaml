@@ -1,0 +1,25 @@
+﻿<Page x:Class="WpfApp3.Page.AddEditAccounting"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp3.Page"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditAccounting">
+
+    <Grid Background="White">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Код предприятия" Margin="5"/>
+            <TextBox Text="{Binding company_id}" Margin="5"/>
+            <TextBlock Text="Наименование продукции" Margin="5"/>
+            <TextBox Text="{Binding nameProduct}" Margin="5"/>
+            <TextBlock Text="Количество" Margin="5"/>
+            <TextBox Text="{Binding quantity}" Margin="5"/>
+            <TextBlock Text="Цена" Margin="5"/>
+            <TextBox Text="{Binding price}" Margin="5"/>
+            <Button x:Name="SaveBtn" Content="Сохранить" Margin="5" Width="150" Height="30" Click="SaveBtn_Click"/>
+            <Button x:Name="Backbtn" Content="Отменить" Margin="5" Width="150" Height="30" Click="Backbtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
